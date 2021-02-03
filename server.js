@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 8080;
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "Develop/public")));
+app.use(express.static("public"));
 
 // routes
 require("./Develop/routes/api-routes")(app);
