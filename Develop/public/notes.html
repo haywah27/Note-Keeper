@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+    
+  <link rel="stylesheet"  href="/assets/css/styles.css">
 </head>
 
 <body>
@@ -39,51 +40,6 @@
 
   <script src="/assets/js/index.js"></script>
 
-  <script type="text/javascript">
-     function runNoteQuery() {
-        var currentURL = window.location.origin;
-        $.ajax({url: currentURL + "/api/notes", method: "GET"})
-            .done(function(noteData){
-              console.log("---------------------");
-              console.log("URL: " + currentURL + "/api/notes")
-              console.log("---------------------");
-              console.log(noteData);
-              console.log("---------------------");
-
-              for (let i = 0; i < noteData.length; i++) {
-                console.log(noteData[i]);
-
-                let noteSection = $("<div>");
-                noteSection.addClass("well");
-                noteSection.attr("id", "noteWell-" + i + 1);
-                $(".list-group").append(noteSection);
-
-                let noteNum = i + 1;
-                $("#noteWell-" + i + 1).append("<h2><span class='noteTitle'>" + noteNum + "</span> | " + noteData[i].title + "&emsp;" + "<i class='fas fa-trash-alt text-danger fa-xs'></i></h2>");
-              }
-
-            });
-      }
-      runNoteQuery();
-      $(".save-note").on("click", function() {
-          var newNote = {
-            title: $(".note-title").val().trim(),
-            text: $(".note-textarea").val().trim()
-          };
-          console.log(newNote);
-
-          var currentURL = window.location.origin;
-          $.post(currentURL + "/api/notes", newNote, function(data){
-            if (data==true){
-              alert("Note saved!");
-            }
-
-            $(".note-title").val("");
-            $(".note-textarea").val("");
-          })
-      });
-      
-  </script>
   
 </body>
 
