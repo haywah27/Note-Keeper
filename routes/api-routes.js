@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 
 module.exports = function (app) {
@@ -17,19 +16,19 @@ module.exports = function (app) {
             if (err) throw err;
             notesData = JSON.parse(data);
             notesData.push(notesOB);
-            let noteNum = 1;
-            notesData.forEach((note, index) => {
+            let noteNum = 0;
+            notesData.forEach((note) => {
                 note.id = noteNum;
                 noteNum++;
                 return notesData;
             });
-            // console.log(JSON.stringify(notesData));
             
             noteStringify = JSON.stringify(notesData);
 
             fs.writeFile("./db/db.json", noteStringify, (err, data) => {
                 if (err) throw err;
             });
+            
         });
         res.send("Note taken.");
 
