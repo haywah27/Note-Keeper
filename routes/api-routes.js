@@ -56,17 +56,27 @@ module.exports = function (app) {
 
         fs.readFile('./db/db.json', (err, data) => {
             if (err) throw err;
+            // using the path /api/notes/:id, the "id" from the URL path can be read using req.params.id
+            let delNote = req.params.id;
+
+            // set variable to the object value described by string 
             notesData = JSON.parse(data);
             
-            res.send(notesData);
-        });
-        
-        noteStringify = JSON.stringify(notesData);
+            for (let i = 0; i < notesData.length; i++) {
+                // turn delNote to readable number using parseFloat
+                if (notesData[i].id === parseFloat(delNote)) {
+                    notesData.splice([i], 1);
+                }
+              }
+            // stringify new content
+            noteStringify = JSON.stringify(notesData);
 
-        fs.writeFile("./db/db.json", noteStringify, (err, data) => {
-            if (err) throw err;
+            // update db file with new content
+            fs.writeFile("./db/db.json", noteStringify, (err, data) => {
+                if (err) throw err;
+            });
         });
-
+        // send new information to api/notes
         res.send('Deleted note');
       });
-}
+};
