@@ -4,7 +4,7 @@
 This app uses Express.js and the File System Module (fs) to read write, display, and delete information based on user interaction.
 
 ## Link to Deployed App
-[https://vast-fortress-44661.herokuapp.com/]
+https://vast-fortress-44661.herokuapp.com/
 
 ## Usage
 By following the [deployed Heroku link](https://vast-fortress-44661.herokuapp.com/), you will be presented with a landing page- click the "Get Started button" to be prompted with a new screen.
