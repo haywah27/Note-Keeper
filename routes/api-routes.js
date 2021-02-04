@@ -29,7 +29,7 @@ module.exports = function (app) {
             notesData.push(notesOB);
 
             // set unique ID
-            let noteNum = 0;
+            let noteNum = 1;
             // for each item in array, add an id that correlates with the index position
             notesData.forEach((note) => {
                 note.id = noteNum;
