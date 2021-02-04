@@ -50,4 +50,23 @@ module.exports = function (app) {
         res.send("Note taken.");
 
     });
+
+
+    app.delete('/api/notes/:id', function (req, res) {
+
+        fs.readFile('./db/db.json', (err, data) => {
+            if (err) throw err;
+            notesData = JSON.parse(data);
+            
+            res.send(notesData);
+        });
+        
+        noteStringify = JSON.stringify(notesData);
+
+        fs.writeFile("./db/db.json", noteStringify, (err, data) => {
+            if (err) throw err;
+        });
+
+        res.send('Deleted note');
+      });
 }
