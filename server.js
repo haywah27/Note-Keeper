@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 8080;
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// serves js and css files
 app.use(express.static("public"));
 
 // routes

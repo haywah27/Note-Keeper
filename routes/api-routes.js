@@ -2,8 +2,8 @@
 const fs = require('fs');
 
 module.exports = function (app) {
-    // when in this domain, display raw values from db file
-    app.get("/api/notes", function (req, res){
+    // when in this domain, read values from db file
+    app.get("/api/notes", (req, res) => {
         // read the db file
         fs.readFile('./db/db.json', (err, data) => {
             // throw error if doesnt work
@@ -15,10 +15,10 @@ module.exports = function (app) {
         });
     });
 
-
-    app.post("/api/notes", function (req, res){
+    // save new notes to db file
+    app.post("/api/notes", (req, res) => {
         // set variable to key-value pairs from page
-        const notesOB = req.body;
+        let notesOB = req.body;
 
         // read db file
         fs.readFile('./db/db.json', (err, data) => {
@@ -31,13 +31,13 @@ module.exports = function (app) {
             // set unique ID
             let noteNum = 1;
             // for each item in array, add an id that correlates with the index position
-            notesData.forEach((note) => {
-                note.id = noteNum;
-                noteNum++;
+            notesData.forEach((entry) => {
+                entry.id = noteNum;
+                noteNum = noteNum + 1;
                 return notesData;
             });
             
-            // stringify object array
+            // turn into string for fs to write new file
             noteStringify = JSON.stringify(notesData);
 
             // update db file with new information
@@ -51,7 +51,7 @@ module.exports = function (app) {
 
     });
 
-
+    // delete notes
     app.delete('/api/notes/:id', function (req, res) {
 
         fs.readFile('./db/db.json', (err, data) => {
